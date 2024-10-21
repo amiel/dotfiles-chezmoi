@@ -1,0 +1,161 @@
+[include]
+  path = ~/.gitconfig.local
+
+[diff "exif"]
+  # brew install exiftool
+  textconv = exiftool
+
+[init]
+	defaultBranch = main
+;   templatedir = ~/.git_template
+
+[core]
+  editor           = lvim
+  filemode         = true
+  logallrefupdates = true
+  whitespace       = fix, space-before-tab, trailing-space
+  quotepath = false
+  attributesfile = /Users/amiel/.gitattributes
+  excludesfile = ~/.gitignore_global
+
+[merge]
+  tool = fugitive
+
+[color]
+  branch    = auto
+  diff      = auto
+  status    = auto
+[color "branch"]
+  current   = green reverse
+  local     = green
+  remote    = yellow
+  upstream  = red
+  plain     = red
+[color "diff"]
+  meta      = yellow bold
+  frag      = magenta bold
+  old       = red bold
+  new       = green bold
+[color "status"]
+  added     = green
+  changed   = yellow
+  untracked = cyan
+
+[color]
+  ui = true
+
+[filter "remove-trailing-whitespace"]
+  clean = sed -E 's/[[:space:]]*$//'
+  smudge = cat
+
+[branch]
+  autosetupmerge = true
+
+[push]
+  default = simple
+
+[diff]
+    tool = kitty
+    guitool = kitty.gui
+[difftool]
+    prompt = false
+    trustExitCode = true
+[difftool "kitty"]
+    cmd = kitty +kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+    cmd = kitty kitty +kitten diff $LOCAL $REMOTE
+
+[mergetool]
+  keepBackup = false
+  prompt = false
+
+[advice]
+  pushNonFastForward = false
+
+[merge "gemfilelock"]
+  name = relocks the gemfile.lock
+  driver = bundle
+
+[alias]
+  st      = status -sb
+  ci      = commit
+  aa      = add --all .
+  dw      = diff --word-diff=color
+  dc      = diff --cached
+  dif     = difftool --no-symlinks --dir-diff
+  br      = branch
+  brav    = branch -a -v
+  brv     = branch -v
+  co      = checkout
+  fall    = fetch --all
+  purr    = pull --rebase
+  puff    = push --force-with-lease
+  l       = log --oneline --decorate --graph
+  lg      = log -p
+  ll      = log --pretty=oneline --abbrev-commit --max-count=15 --decorate --graph
+  browse  = !hub browse
+  compare = !hub compare
+  pom     = push -u origin main
+  ds      = diff --stat=160,120
+  fixup   = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
+  squash  = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
+  ri      = rebase --interactive --autosquash
+  standup = !git log --since yesterday --author `git config user.email` --pretty=short
+  camend  = commit --amend --no-edit
+  cleanup = !SKIP_HOOKUP=1 git switch main && git purr && git delete-merged-branches && git remote prune origin
+  publish = push -u origin HEAD
+  bselect = !git branch | grep -v '^*' | fzf-tmux --reverse | xargs git checkout
+  uncommit = reset --soft HEAD^
+  parent = "!git show-branch | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
+  test = status
+
+
+
+  # Fancy logging.
+  #   h = head
+  #   hp = head with patch
+  #   r = recent commits, only current branch
+  #   ra = recent commits, all reachable refs
+  #   l = all commits, only current branch
+  #   la = all commits, all reachable refs
+  head = !git l -1
+  h = !git head
+  hp = "!source ~/.githelpers && show_git_head"
+  r = !git l -30
+  ra = !git r --all
+  l = "!source ~/.githelpers && pretty_git_log"
+  la = !git l --all
+  today = log --since=midnight --author='Amiel Martin' --oneline
+  yesterday = log --graph --all --since=\"day.before.yesterday.midnight\" --until=midnight --author=\\\"$(git config user.name)\\\" --oneline
+  ctags = !.git/hooks/ctags
+
+[mergetool "fugitive"]
+  cmd = lvim -f -c \"Gdiff\" \"$MERGED\"
+[mergetool "Kaleidoscope"]
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustExitCode = true
+
+[credential]
+  helper = osxkeychain
+
+[filter "media"]
+  clean = git media clean %f
+  smudge = git media smudge %f
+  required = true
+
+[web]
+  browser = open
+[commit]
+  gpgsign = true
+[rebase]
+  autoSquash = true
+  updateRefs = true
+[rerere]
+  enabled = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[help]
+	autoCorrect = prompt
