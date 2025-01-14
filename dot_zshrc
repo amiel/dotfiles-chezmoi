@@ -1,0 +1,52 @@
+autoload -Uz compinit
+compinit
+
+# TODO: ENsure antidote is installed by Brewfile through chezmoi
+source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+antidote load
+
+export FZF_DEFAULT_COMMAND='ag -g ""'
+# source "${ZSH}/custom/plugins/fzf-custom/base16-material-darker.config"
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --reverse --inline-info"
+
+# TODO: Remove GPG, I don't think I need it anymore
+export GPG_TTY=$(tty)
+
+source ~/.zsh_aliases
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+unsetopt share_history
+
+
+
+# TODO: Refactor this go stuff to somewhere
+export PATH="$(brew --prefix)/bin:$PATH"
+export GOBIN="$HOME/go/bin"
+export PATH="$PATH:$GOBIN"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$(brew --prefix)/opt/python/libexec/bin"
+
+eval "$(nodenv init -)"
+
+export COLORTERM=truecolor
+
+
+[[ $(brew --prefix)/bin/kubectl ]] && source <(kubectl completion zsh)
+
+
+# TODO: Where to put this
+export JQ_COLORS='0;31:0;31:1;37:0;37:0;32:1;37:1;37'
+export LANG=en_US.UTF-8
+
+
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+
+# Added by Windsurf
+export PATH="/Users/amiel/.codeium/windsurf/bin:$PATH"

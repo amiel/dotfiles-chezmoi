@@ -159,3 +159,7 @@
 	required = true
 [help]
 	autoCorrect = prompt
+[gpg]
+	format = ssh
+[tag]
+	gpgSign = true
