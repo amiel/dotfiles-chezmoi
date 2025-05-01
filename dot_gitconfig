@@ -106,10 +106,8 @@
   publish = push -u origin HEAD
   bselect = !git branch | grep -v '^*' | fzf-tmux --reverse | xargs git checkout
   uncommit = reset --soft HEAD^
-  parent = "!git show-branch | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
-  test = status
-
-
+  parent  = "!git show-branch | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
+  sw      = switch
 
   # Fancy logging.
   #   h = head

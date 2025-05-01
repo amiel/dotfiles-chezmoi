@@ -61,52 +61,52 @@ local filetypes = {
 }
 
 local keymaps_with_leader = {
-  { keys = "t",  group = "tests",                                                                       desc = "+Tests" },
-  { keys = "tn", cmd = "Neotest run",                                                                   desc = "Run nearest test" },
-  { keys = "ta", cmd = 'lua require("neotest").run.run(vim.fn.expand("%"))',                            desc = "Run all tests in file" },
-  { keys = "ts", cmd = 'lua require("neotest").summary.toggle()',                                       desc = "Toggle neotest summary" },
+  { keys = "t",  group = "tests",                                                                   desc = "+Tests" },
+  { keys = "tn", cmd = "Neotest run",                                                               desc = "Run nearest test" },
+  { keys = "ta", cmd = 'lua require("neotest").run.run(vim.fn.expand("%"))',                        desc = "Run all tests in file" },
+  { keys = "ts", cmd = 'lua require("neotest").summary.toggle()',                                   desc = "Toggle neotest summary" },
 
-  { keys = "b",  cmd = "Telescope buffers",                                                             desc = "Telescope buffers" },
-  { keys = "h",  cmd = "Telescope find_files",                                                          desc = "Telescope find files" },
+  -- { keys = "b",  cmd = "Telescope buffers",                                                             desc = "Telescope buffers" },
+  { keys = "h",  cmd = "Telescope find_files",                                                      desc = "Telescope find files" },
 
-  { keys = "g",  group = "git",                                                                         desc = "+Git" },
-  { keys = "gb", cmd = "Gitsigns blame_line",                                                           desc = "Git blame for line" },
-  { keys = "gf", cmd = "Telescope git_files",                                                           desc = "Telescope Git files" },
+  { keys = "g",  group = "git",                                                                     desc = "+Git" },
+  { keys = "gb", cmd = "Gitsigns blame_line",                                                       desc = "Git blame for line" },
+  { keys = "gf", cmd = "Telescope git_files",                                                       desc = "Telescope Git files" },
 
-  { keys = "l",  group = "lsp",                                                                         desc = "+LSP" },
-  { keys = "lg", cmd = "Telescope live_grep",                                                           desc = "Telescope live grep" },
-  { keys = "lr", cmd = "Telescope lsp_references",                                                      desc = "Telescope LSP References" },
-  { keys = "ls", cmd = "Telescope lsp_document_symbols",                                                desc = "Telescope LSP doc symbols" },
+  { keys = "l",  group = "lsp",                                                                     desc = "+LSP" },
+  { keys = "lg", cmd = "Telescope live_grep",                                                       desc = "Telescope live grep" },
+  { keys = "lr", cmd = "Telescope lsp_references",                                                  desc = "Telescope LSP References" },
+  { keys = "ls", cmd = "Telescope lsp_document_symbols",                                            desc = "Telescope LSP doc symbols" },
 
   -- { keys = "n",  cmd = "set nonumber!",                                                                 desc = "Toggle line numbers" },
 
-  { keys = "n",  group = "FindFiles",                                                                   desc = "+Find Files" },
-  { keys = "nh", cmd = "Telescope git_status",                                                          desc = "Git Status" },
-  { keys = "nb", cmd = "Telescope buffers",                                                             desc = "Buffers" },
-  { keys = "ne", cmd = "Telescope find_files cwd=%:h",                                                  desc = "CWD" },
+  { keys = "n",  group = "FindFiles",                                                               desc = "+Find Files" },
+  { keys = "nh", cmd = "Telescope git_status",                                                      desc = "Git Status" },
+  { keys = "nb", cmd = "Telescope buffers",                                                         desc = "Buffers" },
+  { keys = "ne", cmd = "Telescope find_files cwd=%:h",                                              desc = "CWD" },
 
 
-  { keys = "o",  group = "Other",                                                                       desc = "+Open Other" },
-  { keys = "oo", cmd = "Other",                                                                         desc = "Open related file" },
-  { keys = "os", cmd = "OtherSplit",                                                                    desc = "Open related file in split" },
-  { keys = "ov", cmd = "OtherVSplit",                                                                   desc = "Open related file in vertical split" },
+  { keys = "o",  group = "Other",                                                                   desc = "+Open Other" },
+  { keys = "oo", cmd = "Other",                                                                     desc = "Open related file" },
+  { keys = "os", cmd = "OtherSplit",                                                                desc = "Open related file in split" },
+  { keys = "ov", cmd = "OtherVSplit",                                                               desc = "Open related file in vertical split" },
 
-  { keys = ".",  group = "Other",                                                                       desc = "+Open Other" },
-  { keys = "..", cmd = "Other",                                                                         desc = "Open related file" },
-  { keys = ".-", cmd = "OtherSplit",                                                                    desc = "Open related file in split" },
-  { keys = ".|", cmd = "OtherVSplit",                                                                   desc = "Open related file in vertical split" },
+  { keys = ".",  group = "Other",                                                                   desc = "+Open Other" },
+  { keys = "..", cmd = "Other",                                                                     desc = "Open related file" },
+  { keys = ".-", cmd = "OtherSplit",                                                                desc = "Open related file in split" },
+  { keys = ".|", cmd = "OtherVSplit",                                                               desc = "Open related file in vertical split" },
 
-  { keys = "s",  cmd = "Telescope lsp_dynamic_workspace_symbols",                                       desc = "LSP symbols" },
-  { keys = "x",  cmd = "lua vim.lsp.buf.format()",                                                      desc = "LSP Autoformat" },
-  { keys = "/",  cmd = "nohlsearch",                                                                    desc = "clear search hilight" },
-  { keys = "|",  cmd = "vsplit",                                                                        desc = "Split Vertical" },
-  { keys = "-",  cmd = "split",                                                                         desc = "Split Horizontal" },
-  { keys = ",",  cmd = "e #",                                                                           desc = "Previous File" },
+  { keys = "s",  cmd = "Telescope lsp_dynamic_workspace_symbols",                                   desc = "LSP symbols" },
+  { keys = "x",  cmd = "lua vim.lsp.buf.format()",                                                  desc = "LSP Autoformat" },
+  { keys = "/",  cmd = "nohlsearch",                                                                desc = "clear search hilight" },
+  { keys = "|",  cmd = "vsplit",                                                                    desc = "Split Vertical" },
+  { keys = "-",  cmd = "split",                                                                     desc = "Split Horizontal" },
+  { keys = ",",  cmd = "e #",                                                                       desc = "Previous File" },
 
-  { keys = "m",  group = "Macros",                                                                      desc = "+Macros" },
-  { keys = "ml", ".s/\\(\\w\\+\\) \\(||\\)\\?= \\(.*\\)$/let(:\\1) { \\3 }/",                           desc = "Promote to let" },
-  { keys = "mf", ".s/\\(\\w\\+\\) \\(||\\)\\?= \\(.*\\)$/def \\1\\r  \\3\\rend/",                       desc = "Promote to function" },
-  { keys = "mc", ".s/\\(class\\|module\\) \\(\\w\\+\\)::\\(\\w\\+\\)/module \\2\\r  \\1 \\3/<cr>Goend", desc = "Unnest module/class definition" }
+  { keys = "m",  group = "Macros",                                                                  desc = "+Macros" },
+  { keys = "ml", cmd = "s/\\(\\w\\+\\) \\(||\\)\\?= \\(.*\\)$/let(:\\1) { \\3 }/",                  desc = "Promote to let" },
+  { keys = "mf", cmd = "s/\\(\\w\\+\\) \\(||\\)\\?= \\(.*\\)$/def \\1\\r  \\3\\rend/",              desc = "Promote to function" },
+  { keys = "mc", cmd = "s/\\(class\\|module\\) \\(\\w\\+\\)::\\(\\w\\+\\)/module \\2\\r  \\1 \\3/", desc = "Unnest module/class definition" }
   --
   --   l = { "<cmd>.s/\\(\\w\\+\\) \\(||\\)\\?= \\(.*\\)$/let(:\\1) { \\3 }/<cr>", "Promote to let" },
   --   f = { "<cmd>.s/\\(\\w\\+\\) \\(||\\)\\?= \\(.*\\)$/def \\1\\r  \\3\\rend/<cr>", "Promote to function" },
@@ -142,10 +142,12 @@ end
 
 -- Keymaps with leader
 for _, t in ipairs(keymaps_with_leader) do
-  local keys = string.format("<leader>%s", t["keys"])
-  local command = string.format("<cmd>%s<cr>", t["cmd"])
+  if t["cmd"] then
+    local keys = string.format("<leader>%s", t["keys"])
+    local command = string.format("<cmd>%s<cr>", t["cmd"])
 
-  vim.keymap.set("n", keys, command, { desc = t["desc"] })
+    vim.keymap.set("n", keys, command, { desc = t["desc"] })
+  end
 end
 
 -- Assign main configuration
