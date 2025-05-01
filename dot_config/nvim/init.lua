@@ -133,6 +133,8 @@ vim.keymap.set("n", "<S-l>", ":tabn<cr>")
 vim.keymap.set("i", "<C-c>", "<ESC>")
 vim.keymap.set("i", "<C-[>", "<C-c>")
 
+vim.keymap.set("n", "K", ":RustLsp hover actions<cr>")
+
 -- There's no more configuration after this comment, just setup.
 
 -- Assign global configuration

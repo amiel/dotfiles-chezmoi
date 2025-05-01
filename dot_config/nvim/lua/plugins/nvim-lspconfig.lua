@@ -3,35 +3,48 @@ return {
   config = function()
     local lspconfig = require("lspconfig")
 
-    lspconfig.solargraph.setup {
-      cmd = { "/opt/homebrew/opt/rbenv/shims/solargraph", "stdio" },
-      autoformat = true
-    }
+    --
+    -- local lspconfig_defaults = lspconfig.util.default_config
+    -- lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+    --   "force",
+    --   lspconfig_defaults.capabilities,
+    --   require("cmp_nvim_lsp").default_capabilities()
+    -- )
+    --
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    --
+    -- lspconfig.solargraph.setup {
+    --   cmd = { "/opt/homebrew/opt/rbenv/shims/solargraph", "stdio" },
+    --   autoformat = true,
+    --   capabilities = capabilities
+    -- }
 
-    -- RubyLSP looks promising and is actively maintained, but lacks features
-    -- like that Solargraph has (references for example). I assume in a few months
-    -- it will have caught up. One nice thing is supports is running tests, so you
-    -- can make it work with nvim-test to watch a spec file.
-    -- lspconfig.ruby_lsp.setup({
-    --   cmd = { os.getenv("HOME") .. "/.rbenv/shims/ruby-lsp" },
-    --   init_options = {
-    --     formatter = "rubocop",
-    --     linters = { "rubocop" },
-    --   },
-    -- })
+    lspconfig.ruby_lsp.setup({
+      cmd = { "/opt/homebrew/opt/rbenv/shims/ruby-lsp" },
+      formatter = "rubocop_internal",
+      init_options = {
+        formatter = "rubocop_internal",
+        linters = { "rubocop" }
+      },
+      capabilities = capabilities
+    })
 
     lspconfig.eslint.setup {}
     lspconfig.html.setup {}
     lspconfig.cssls.setup {}
+    -- lspconfig.rust_analyzer.setup {
+    --   capabilities = capabilities
+    -- }
 
     lspconfig.lua_ls.setup {
+      capabilities = capabilities,
       on_init = function(client)
         local path = client.workspace_folders[1].name
-        if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+        if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
           return
         end
 
-        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+        client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
           runtime = {
             -- Tell the language server which version of Lua you're using
             -- (most likely LuaJIT in the case of Neovim)
@@ -59,9 +72,9 @@ return {
               indent_style = "space",
               indent_size = "2",
               quote_style = "double",
-              trailing_table_separator = "never",
+              trailing_table_separator = "never"
             }
-          },
+          }
         }
       }
     }
