@@ -1,8 +1,6 @@
-autoload -Uz compinit
-compinit
-
-# TODO: ENsure antidote is installed by Brewfile through chezmoi
+# TODO: Ensure antidote is installed by Brewfile through chezmoi
 source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+# plugins in .zsh_plugins.txt
 antidote load
 
 export FZF_DEFAULT_COMMAND='ag -g ""'
@@ -10,7 +8,7 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --reverse --inline-info"
 
 # TODO: Remove GPG, I don't think I need it anymore
-export GPG_TTY=$(tty)
+# export GPG_TTY=$(tty)
 
 source ~/.zsh_aliases
 
@@ -18,7 +16,6 @@ source ~/.zsh_aliases
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 unsetopt share_history
-
 
 
 # TODO: Refactor this go stuff to somewhere
@@ -32,7 +29,6 @@ eval "$(nodenv init -)"
 
 export COLORTERM=truecolor
 
-
 [[ $(brew --prefix)/bin/kubectl ]] && source <(kubectl completion zsh)
 
 
@@ -41,12 +37,37 @@ export JQ_COLORS='0;31:0;31:1;37:0;37:0;32:1;37:1;37'
 export LANG=en_US.UTF-8
 
 
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+# --- Bash-like refinement for TAB ---
+# unsetopt MENU_COMPLETE       # Don't insert the first match automatically
+# setopt AUTO_LIST             # List when ambiguous
+# setopt LIST_AMBIGUOUS        # Only list if more than one match
+# setopt COMPLETE_IN_WORD      # Allow completion in the middle of a word
+#
 
-  autoload -Uz compinit
-  compinit
-fi
+bindkey              '^I'         menu-select
+bindkey "$terminfo[kcbt]" reverse-menu-select
 
-# Added by Windsurf
-export PATH="/Users/amiel/.codeium/windsurf/bin:$PATH"
+
+zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
+zstyle ':completion:*:*' matcher-list 'm:{[:lower:]-}={[:upper:]_}' '+r:|[.]=**'
+
+builtin zstyle ':autocomplete:*:unambiguous' format \
+    $'%{\e[0;2m%}%Bcommon substring:%b %0F%11K%d%f%k'
+#
+# # Optional: Make TAB itself go directly into fzf-tab instead of bash-like completion
+# # bindkey '^I' fzf-tab-complete
+#
+# # Customize fzf-tab appearance
+# zstyle ':fzf-tab:*' fzf-preview 'less ${(Q)realpath}'
+# zstyle ':fzf-tab:*' switch-group ',' '.'   # group switching keys
+#
+# # Example: colorize git branch completion
+# zstyle ':completion:*:git-checkout:*' sort false
+# zstyle ':completion:*:git-checkout:*' fzf-preview \
+#   'git log --oneline --color=always --date=short --decorate=short -n 20 -- {}'
+#
+# # --- Git status files ---
+# # Preview diff of a file when completing in git commands like add/checkout
+# zstyle ':completion:*:git-(add|checkout|restore):*' fzf-preview \
+#   'git diff --color=always -- {} | head -n 200'
+#

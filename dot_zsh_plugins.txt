@@ -1,0 +1,15 @@
+marlonrichert/zsh-autocomplete
+
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/fzf
+ohmyzsh/ohmyzsh path:plugins/tmuxinator
+
+ELLIOTTCABLE/rbenv.plugin.zsh
+schoonology/userenv-zsh
+
+chriskempson/base16-shell
+softmoth/zsh-vim-mode branch:main
+
+# zsh-users/zsh-completions kind:fpath path:src
+
+romkatv/powerlevel10k
