@@ -1,8 +1,9 @@
-marlonrichert/zsh-autocomplete
+# marlonrichert/zsh-autocomplete
 
 ohmyzsh/ohmyzsh path:plugins/git
 ohmyzsh/ohmyzsh path:plugins/fzf
 ohmyzsh/ohmyzsh path:plugins/tmuxinator
+ohmyzsh/ohmyzsh path:plugins/rake-fast
 
 ELLIOTTCABLE/rbenv.plugin.zsh
 schoonology/userenv-zsh
@@ -10,6 +11,7 @@ schoonology/userenv-zsh
 chriskempson/base16-shell
 softmoth/zsh-vim-mode branch:main
 
-# zsh-users/zsh-completions kind:fpath path:src
+Aloxaf/fzf-tab
+Freed-Wu/fzf-tab-source
 
 romkatv/powerlevel10k
